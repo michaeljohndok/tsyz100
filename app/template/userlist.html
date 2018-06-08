@@ -1,0 +1,52 @@
+<div class="scrollable section">
+  <div class="scrollable-content ">
+
+    <div ui-content-for="title">
+      <span>传承、融汇、共进</span>
+    </div>
+
+    <div class="homt-message border" ng-if = "message">
+      {{message.body_text}}
+
+      <button class="btn btn-primary btn-block" ng-click = "msgAction(message)">
+        {{message.btn_text}}
+      </button>
+    </div>
+
+    <div class="form-group has-success has-feedback">
+      <input ng-model-options='{ debounce: 1500 }' type="text" ng-change = "search()" ng-model="search_word" class="form-control" placeholder="智能搜索，输入关键字、或词">
+    </div>
+
+    <div class="studentmanage">
+      <div class="studentmanage-content">
+        <div class="list-group">
+
+          <div ng-repeat="user in users" ng-if = "user.get('name')" ng-click = "triggerProfile(user)" class="list-group-item">
+            <span>{{ user.get('name') }} </span>
+            <span>{{ user.get('industry') }}</span>
+
+            
+            <i ng-if = "!user.show" class="fa fa-chevron-down user-list pull-right"></i>
+            
+
+            <div ng-if = "user.show" style = "margin-top:10px;">
+              <p>手机 ：{{user.get('mobilePhoneNumber') ? user.get('mobilePhoneNumber') : user.get('number')}}</p>
+              <p ng-if = "user.get('sex')">性别 ：{{user.get('sex')}}</p>
+              <p ng-if = "user.get('home_town')">家乡 ：{{user.get('home_town')}}</p>
+              <p ng-if = "user.get('graduate_year')">届别 ：{{user.get('graduate_year')}}</p>
+              <p ng-if = "user.get('country')">国家 ：{{user.get('country')}}</p>
+              <p ng-if = "user.get('city')">居住城市 ：{{user.get('city')}}</p>
+              <p ng-if = "user.get('company')">公司 ： {{user.get('company')}}<i ng-if = "user.show" class="fa fa-chevron-up pull-right"></i></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button ng-if = "!load_more_end && !search_word" ng-click = "user_load_more()" class="btn btn-primary btn-block">
+      更多
+    </button>
+
+
+  </div>
+</div>
